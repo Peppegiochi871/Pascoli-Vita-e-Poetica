@@ -50,7 +50,7 @@
             position: absolute;
             inset: 0;
             background: url('pascoli-header.jpg') center/cover no-repeat;
-            opacity: 0.5;
+            opacity: 0.65;
             z-index: 0;
         }
 
@@ -66,11 +66,36 @@
             position: relative;
             z-index: 2;
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
             letter-spacing: 2px;
             color: var(--light-apricot);
-            text-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            text-shadow: 0 6px 25px rgba(0,0,0,0.55);
+            display: inline-block;
+            overflow: hidden;
         }
+
+.reveal-mask {
+    display: inline-block;
+    transform: translateY(50px) scale(0.8);
+    opacity: 0;
+    animation: popUp 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes popUp {
+    0% {
+        transform: translateY(50px) scale(0.8);
+        opacity: 0;
+    }
+    70% {
+        transform: translateY(-10px) scale(1.1); /* il "pop" */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scale(1); /* posizione finale */
+        opacity: 1;
+    }
+}
+
 
         .section {
             padding: 100px 0;
@@ -187,7 +212,10 @@
 <body>
 
     <section class="top-hero">
-        <h1>Giovanni Pascoli</h1>
+        <h1 class="reveal-mask">
+            Giovanni Pascoli:<br>
+            il poeta fanciullino
+        </h1>
     </section>
 
     <div class="cursor-sphere" id="sphere"></div>
