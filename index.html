@@ -4,12 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giovanni Pascoli - Sito Scolastico</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --dark-wine: #6F1D1B;
+            --camel: #BB9457;
+            --dark-coffee: #432818;
+            --chocolate: #99582A;
+            --light-apricot: #FFE6A7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-wine), var(--dark-coffee));
+            color: var(--light-apricot);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .top-hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .top-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('pascoli-header.jpg') center/cover no-repeat;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .top-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(111,29,27,0.7), rgba(67,40,24,0.8));
+            z-index: 1;
+        }
+
+        .top-hero h1 {
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            letter-spacing: 2px;
+            color: var(--light-apricot);
+            text-shadow: 0 10px 40px rgba(0,0,0,0.7);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        h1, h2, h3 { font-weight: 600; }
+
+        h1 { color: var(--light-apricot); }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--camel);
+        }
+
+        p { color: #f3d9b1; }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(67, 40, 24, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 230, 167, 0.2);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light-apricot);
+            transition: 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--camel);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-img img {
+            width: 280px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            border: 3px solid var(--camel);
+        }
+
+        .card {
+            background: rgba(153, 88, 42, 0.25);
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 230, 167, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+            border-color: var(--camel);
+            background: rgba(187, 148, 87, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            background: var(--dark-coffee);
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: var(--camel);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Cursor sphere con colore coordinato */
+        .cursor-sphere {
+            position: fixed;
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle at 30% 30%, var(--light-apricot), var(--camel));
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            box-shadow: 0 0 25px rgba(255, 230, 167, 0.6);
+            mix-blend-mode: screen;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
+    <section class="top-hero">
+        <h1>Giovanni Pascoli</h1>
+    </section>
+
+    <div class="cursor-sphere" id="sphere"></div>
+
     <header class="header">
         <div class="container">
             <h1>Giovanni Pascoli</h1>
@@ -26,15 +208,13 @@
         </div>
     </header>
 
-    <!-- ===== HOME ===== -->
     <section id="home" class="section hero">
         <div class="container hero-content">
             <div>
                 <h2>Il poeta del fanciullino</h2>
                 <p>
                     Giovanni Pascoli è uno dei maggiori poeti italiani tra Ottocento e Novecento.
-                    La sua poetica ruota attorno alla figura del "fanciullino", simbolo dello
-                    stupore e della capacità di vedere il mistero nascosto nella realtà.
+                    La sua poetica ruota attorno alla figura del "fanciullino".
                 </p>
             </div>
             <div class="hero-img">
@@ -43,106 +223,48 @@
         </div>
     </section>
 
-    <!-- ===== IMMAGINE DEL MONDO ===== -->
     <section id="immagine" class="section">
         <div class="container">
             <h2>Immagine del mondo</h2>
             <p>
-                Per Pascoli il mondo non è una realtà semplice e razionale, ma un mistero
-                profondo che si rivela attraverso simboli, suoni e piccole cose quotidiane.
-                La natura è viva, animata da presenze segrete che solo uno sguardo puro
-                può cogliere. L’universo pascoliano è fragile, segnato dal dolore personale
-                e dal bisogno di protezione, ma anche illuminato da improvvisi momenti
-                di meraviglia.
+                Il mondo pascoliano è un mistero profondo che si rivela attraverso simboli
+                e piccole cose quotidiane.
             </p>
         </div>
     </section>
 
-    <!-- ===== POETICA ===== -->
-    <section id="poetica" class="section alt">
+    <section id="poetica" class="section">
         <div class="container">
             <h2>Poetica e simbolismo</h2>
-
             <div class="card">
-                <h3>Il fanciullino come simbolo</h3>
-                <p>
-                    Secondo Pascoli, dentro ogni uomo vive un piccolo fanciullo, una voce
-                    interiore che sa stupirsi di tutto ciò che vede e che sente. Da bambini
-                    questa voce coincide con la nostra, ma crescendo essa resta nascosta.
-                    Il poeta è colui che riesce ancora ad ascoltarla e a darle voce.
-                </p>
+                <h3>Il fanciullino</h3>
+                <p>Dentro ogni uomo vive un piccolo fanciullo capace di stupirsi.</p>
             </div>
-
             <div class="card">
                 <h3>Il poeta come novello Adamo</h3>
-                <p>
-                    Il poeta è paragonato a un nuovo Adamo che mette nome alle cose per
-                    la prima volta. La poesia è intuizione pura: non nasce dalla razionalità,
-                    ma dallo stupore infantile che coglie il mistero della realtà.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>La funzione della poesia</h3>
-                <p>
-                    La poesia è illuminazione improvvisa, intuizione momentanea che rivela
-                    la verità nascosta nelle cose semplici e quotidiane.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Il valore universale</h3>
-                <p>
-                    Il fanciullino è presente in ogni uomo. Il poeta conserva questa
-                    capacità e la trasmette attraverso i suoi versi, rendendo la poesia
-                    un linguaggio universale.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Conclusione</h3>
-                <p>
-                    La poetica del fanciullino segna un momento centrale nella letteratura
-                    italiana: collega la tradizione romantica e apre alla sensibilità
-                    decadente. In Pascoli la poesia è uno sguardo innocente che rinnova
-                    il mondo.
-                </p>
+                <p>Il poeta scopre il mondo come fosse sempre nuovo.</p>
             </div>
         </div>
     </section>
 
-    <!-- ===== POESIA ===== -->
     <section id="poesia" class="section">
         <div class="container">
-            <h2>La poesia scelta - X Agosto</h2>
-            <p>
-                San Lorenzo, io lo so perché tanto
-                di stelle per l’aria tranquilla
-                arde e cade, perché sì gran pianto
-                nel concavo cielo sfavilla.
-            </p>
+            <h2>La poesia scelta</h2>
+            <p>Testo della poesia selezionata.</p>
         </div>
     </section>
 
-    <!-- ===== MAPPE ===== -->
-    <section id="mappe" class="section alt">
+    <section id="mappe" class="section">
         <div class="container">
             <h2>Mappe concettuali</h2>
-            <p>
-                - Il fanciullino → stupore, intuizione, purezza
-                - Poesia → rivelazione, simbolo, mistero
-                - Natura → segni nascosti, suoni, cose umili
-                - Poeta → voce dell’infanzia interiore
-            </p>
+            <p>Mappa concettuale riassuntiva della poetica pascoliana.</p>
         </div>
     </section>
 
-    <!-- ===== VIDEO ===== -->
     <section id="video" class="section">
         <div class="container">
-            <h2>Video di approfondimento</h2>
-            <iframe width="100%" height="400" src="https://www.youtube.com/embed/VIDEO_ID" 
-                title="Video su Pascoli" frameborder="0" allowfullscreen></iframe>
+            <h2>Video</h2>
+            <p>Video di approfondimento su Giovanni Pascoli.</p>
         </div>
     </section>
 
@@ -152,6 +274,44 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        const sphere = document.getElementById("sphere");
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        document.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateSphere() {
+            const speed = 0.07;
+            currentX += (mouseX - currentX) * speed;
+            currentY += (mouseY - currentY) * speed;
+
+            sphere.style.left = currentX + "px";
+            sphere.style.top = currentY + "px";
+
+            requestAnimationFrame(animateSphere);
+        }
+
+        animateSphere();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function(e) {
+                const targetId = this.getAttribute("href");
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: "smooth" });
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
